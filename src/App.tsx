@@ -6,6 +6,7 @@ import DeckSelector from "./shared/DeckSelector/DeckSelector";
 import { Grid } from "@mui/material";
 import { useContext } from "react";
 import { MixerContext } from "./providers/AudioProvider/AudioProvider";
+import AudioGraph from "./shared/AudioGraph/AudioGraph";
 
 const gridStyle = {
   bgcolor: "background.paper",
@@ -15,12 +16,13 @@ const gridStyle = {
 export default function App() {
   // TODO:
   // [BUG] - Load trackA, play trackA, load trackB, attempt to control trackA by volume / transport
-  // [SPIKE] - what purpose does redux serve after moving all audio to context?
-  const { audioCtx, channels } = useContext(MixerContext);
+  // [SPIKE] - what purpose does redux serve after needing to move all audio to context?
 
   return (
+    // <AudioGraph />
     <Grid container spacing={2}>
       {/* <Whiteboard /> */}
+
       <Grid xs={12} item style={gridStyle}>
         <DeckSelector />
       </Grid>

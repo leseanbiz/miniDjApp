@@ -22,8 +22,8 @@ type Channels = { A: Channel; B: Channel; C: Channel; D: Channel };
 export type Channel = {
   id: string;
   selector: string;
-  audioElement: HTMLAudioElement;
-  source: MediaElementAudioSourceNode;
+  element: HTMLAudioElement;
+  elementSource: MediaElementAudioSourceNode;
   volumeNode: GainNode;
 };
 export type Selectors = "A" | "B" | "C" | "D";
@@ -42,6 +42,7 @@ export const MixerProvider = ({ children }: Props) => {
   const selectors = ["A", "B", "C", "D"];
   // TODO:have a function for eq, gain, fx stack, may need a wet & dry output for a visualizer.
   // returning createNewGainNode separetely should allow adding gain nodes to existing audio sources that may already have gain nodes
+  // Modify channels data structure to add values for react-flow nodes(name, position, etc)
   const createNewGainNode = (
     source: MediaElementAudioSourceNode,
     id: string
@@ -59,8 +60,8 @@ export const MixerProvider = ({ children }: Props) => {
     const channel = {
       id: id,
       selector: selectors[channels.length],
-      audioElement: element,
-      source: elementSource,
+      element: element,
+      elementSource: elementSource,
       volumeNode: gainNode,
     };
     setChannels((prev) => [...prev, channel]);

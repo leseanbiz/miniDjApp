@@ -23,7 +23,7 @@ const CrossFader = ({
       // [BUG] - loading trackA then trackB causes an extra gain node to be created on channel A
       // [BUG] - loading trackB first, causes some odd connection in the gain nodes
       channels?.map((channel) => {
-        createNewGainNode(channel.source, channel.id);
+        createNewGainNode(channel.elementSource, channel.id);
       });
     }
   }, [channels]);

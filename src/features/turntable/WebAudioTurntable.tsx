@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { MixerContext } from "../../providers/AudioProvider/AudioProvider";
+import Fader from "../../shared/Fader/Fader";
 import FileUpload from "../../shared/FileUpload/FileUpload";
 import TimeDisplay from "./TimeDisplay";
 
@@ -13,10 +14,11 @@ const WebAudioTurntable = ({ title }: Props) => {
   const [isPaused, setIsPaused] = useState(false);
   const [isStopped, setIsStopped] = useState(false);
   const [duration, setDuration] = useState(0);
+  const [playbackRate, setPlaybackRate] = useState(1);
 
   const audioSrc = channels?.find(
     (channel) => channel.selector === title
-  )?.audioElement;
+  )?.element;
   // hack to get duration to display without having to play/stop.
   useEffect(() => {
     audioSrc?.addEventListener("canplaythrough", () =>
@@ -49,7 +51,10 @@ const WebAudioTurntable = ({ title }: Props) => {
     audioSrc?.pause();
     audioSrc!.currentTime = 0;
   };
-
+  const changePlaybackRate = (value: any) => {
+    setPlaybackRate(value);
+    audioSrc!.playbackRate = playbackRate;
+  };
   return (
     <>
       <p>{title}</p>
@@ -77,6 +82,12 @@ const WebAudioTurntable = ({ title }: Props) => {
           isStopped={isStopped}
         />
       ) : null}
+      <Fader
+        changePosition={changePlaybackRate}
+        min={0}
+        max={2}
+        position={playbackRate}
+      />
     </>
   );
 };
