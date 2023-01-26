@@ -3,6 +3,7 @@ import whiteboardReducer, {
   IInitialState,
 } from "../features/whiteBoard/whiteBoardSlice";
 import mixerReducer from "../features/mixer/mixerSlice";
+import themeReducer from "../app/themeSlice";
 import { createClient } from "@liveblocks/client";
 import { liveblocksEnhancer } from "@liveblocks/redux";
 
@@ -21,6 +22,7 @@ export const store = configureStore({
   reducer: {
     whiteboard: whiteboardReducer,
     mixer: mixerReducer,
+    theme: themeReducer,
   },
   enhancers: [liveblocksEnhancer<IInitialState>(liveblocksEnhancerConfig)],
 });
