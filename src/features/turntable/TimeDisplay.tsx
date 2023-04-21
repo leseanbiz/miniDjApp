@@ -22,11 +22,11 @@ const TimeDisplay = ({
   const [minutes, setMinutes] = useState(initMinutes);
   const [seconds, setSeconds] = useState(initSeconds);
 
-  const reset = (intervalId: any) => {
-    clearInterval(intervalId);
-    setMinutes(initMinutes);
-    setSeconds(initSeconds);
-  };
+  // const reset = (intervalId: any) => {
+  //   clearInterval(intervalId);
+  //   setMinutes(initMinutes);
+  //   setSeconds(initSeconds);
+  // };
 
   useEffect(() => {
     if (isEmpty) {
@@ -40,7 +40,7 @@ const TimeDisplay = ({
         }
         if (seconds === 0) {
           if (minutes === 0) {
-            reset(timerInterval);
+            // reset(timerInterval);
           } else {
             setMinutes((prev) => prev - 1);
             setSeconds(59);
@@ -48,13 +48,21 @@ const TimeDisplay = ({
         }
       }
     }, 1000);
-    if (isStopped) {
-      reset(timerInterval);
-    }
+    // if (isStopped) {
+    //   reset(timerInterval);
+    // }
     return () => {
       clearInterval(timerInterval);
     };
-  }, [isEmpty, isStopped, isPaused, isPlaying, seconds, minutes, reset]);
+  }, [
+    isEmpty,
+    isStopped,
+    isPaused,
+    isPlaying,
+    seconds,
+    minutes,
+    // reset
+  ]);
 
   return (
     <Grid container spacing={2}>

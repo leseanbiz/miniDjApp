@@ -7,28 +7,32 @@ import { Card, Grid } from "@mui/material";
 
 import AudioGraph from "./features/AudioGraph/AudioGraph";
 import ThemeViewer from "./features/ThemeViewer/ThemeViewer";
-import { Theme, ThemeProvider } from "@mui/system";
-import { theme1 } from "./app/themes/theme1";
-import { theme2 } from "./app/themes/theme2";
-import { useAppSelector } from "./app/hooks";
-import { selectCurrentTheme } from "./app/themeSlice";
-import texture from "./metallic_texture.jpg";
+import {
+  // Theme,
+  ThemeProvider,
+} from "@mui/system";
+// import { theme1 } from "./app/themes/theme1";
+// import { theme2 } from "./app/themes/theme2";
+// import { useAppSelector } from "./app/hooks";
+// import { selectCurrentTheme } from "./app/themeSlice";
+// import texture from "./metallic_texture.jpg";
 import neumorphicTheme from "./app/themes/neumorphicTheme";
-const themes: { [key: string]: Theme } = {
-  theme1,
-  theme2,
-};
+
+// const themes: { [key: string]: Theme } = {
+//   theme1,
+//   theme2,
+// };
 
 export default function App() {
   // TODO:
   // [BUG] - Load trackA, play trackA, load trackB, attempt to control trackA by volume / transport
   // [SPIKE] - what purpose does redux serve after needing to move all audio to context?
-  const currentTheme = useAppSelector(selectCurrentTheme);
-  console.log(texture);
+  // const currentTheme = useAppSelector(selectCurrentTheme);
+
   return (
     <>
       <ThemeProvider theme={neumorphicTheme}>
-        {/* <AudioGraph /> */}
+        <AudioGraph />
         <Grid
           container
           style={{
@@ -38,7 +42,7 @@ export default function App() {
             //   backgroundBlendMode: "luminosity",
           }}
         >
-          {/* <Whiteboard /> */}
+          <Whiteboard />
 
           <Grid xs={12} item>
             <DeckSelector />
@@ -63,7 +67,7 @@ export default function App() {
           </Grid> */}
         </Grid>
 
-        {/* <ThemeViewer /> */}
+        <ThemeViewer />
       </ThemeProvider>
     </>
   );

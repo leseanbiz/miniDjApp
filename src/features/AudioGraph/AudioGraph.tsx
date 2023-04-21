@@ -1,5 +1,9 @@
-import React, { useCallback, useContext, useState } from "react";
-import { MixerContext } from "../../providers/AudioProvider/AudioProvider";
+import {
+  useCallback,
+  // useContext,
+  useState,
+} from "react";
+// import { MixerContext } from "../../providers/AudioProvider/AudioProvider";
 import ReactFlow, {
   Background,
   Controls,
@@ -10,7 +14,7 @@ import ReactFlow, {
 import "reactflow/dist/style.css";
 
 const AudioGraph = () => {
-  const { channels } = useContext(MixerContext);
+  // const { channels } = useContext(MixerContext);
   const initialNodes = [
     {
       id: "1",
