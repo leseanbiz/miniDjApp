@@ -6,7 +6,6 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { IColors } from "../../app/material-ui";
 import { changeTheme, selectCurrentTheme } from "../../app/themeSlice";
@@ -15,11 +14,10 @@ const ThemeViewer = () => {
   const theme: Theme = useTheme();
   const dispatch = useAppDispatch();
   const currentTheme: string = useAppSelector(selectCurrentTheme);
-  console.log({ theme });
-  console.log("Object.keys", Object.keys(theme.customColors));
+
   const customColors = Object.keys(theme.customColors).map((color: string) => {
     const currentColor = theme.customColors[color as IColors];
-    console.log({ color }, currentColor);
+
     return (
       <div key={color}>
         <p>{color}</p>
@@ -70,7 +68,7 @@ const ThemeViewer = () => {
       </div>
     );
   });
-  console.log(customColors);
+
   return (
     <div>
       customColors

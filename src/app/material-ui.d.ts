@@ -1,6 +1,7 @@
 import { Theme, ThemeOptions, Palette } from "@mui/material/styles";
 
 type IColors = "color1" | "color2" | "color3" | "color4" | "color5";
+
 type IExtendedColor = {
   hex?: string;
   hsl?: string;
@@ -23,7 +24,7 @@ declare module "@mui/material/styles" {
   }
 
   interface ThemeOptions {
-    customColors: ICustomColors;
+    customColors: ICustomColors | null;
   }
   //   export function createTheme(options?: CustomThemeOptions): CustomTheme;
 }

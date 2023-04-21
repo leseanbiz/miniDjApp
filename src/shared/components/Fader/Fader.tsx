@@ -1,3 +1,4 @@
+import { styled } from "@mui/material";
 import Slider from "@mui/material/Slider";
 
 type Props = {
@@ -8,6 +9,24 @@ type Props = {
   position?: number;
   disabled?: boolean;
 };
+
+const StyledFader = styled(Slider)({
+  color: "black", //color of the slider between thumbs
+  "& .MuiSlider-thumb": {
+    width: "25px",
+    height: "10px",
+    borderRadius: 0,
+    backgroundColor: "black", //color of thumbs
+  },
+  "& .MuiSlider-rail": {
+    color: "black",
+    backgroundColor: "gray", ////color of the slider outside  teh area between thumbs
+  },
+  "& .MuiSlider-track": {
+    color: "black",
+    backgroundColor: "gray", ////color of the slider outside  teh area between thumbs
+  },
+});
 
 const Fader = ({
   min = 0,
@@ -20,7 +39,7 @@ const Fader = ({
   return (
     <>
       <p>{label}</p>
-      <Slider
+      <StyledFader
         aria-label="Vertical Fader"
         orientation="vertical"
         step={0.001}

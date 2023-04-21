@@ -1,11 +1,9 @@
-import { Grid, Stack } from "@mui/material";
+import { Grid } from "@mui/material";
 import { useContext, useState } from "react";
-import {
-  audioCtx,
-  MixerContext,
-} from "../../providers/AudioProvider/AudioProvider";
-import CrossFader from "../../shared/Fader/CrossFader";
-import Fader from "../../shared/Fader/Fader";
+import { MixerContext } from "../../providers/AudioProvider/AudioProvider";
+import CrossFader from "../../shared/components/Fader/CrossFader";
+import Fader from "../../shared/components/Fader/Fader";
+import Knob from "../../shared/components/Knob/Knob";
 
 const Mixer = () => {
   const { channels } = useContext(MixerContext);
@@ -18,6 +16,7 @@ const Mixer = () => {
       if (channel.selector === selector) {
         channel.volumeNode.gain.value = value;
       }
+      return value;
     });
     setFaderLevels((prevFaderLevels) => {
       return { ...prevFaderLevels, [selector]: { level: value } };
@@ -26,22 +25,52 @@ const Mixer = () => {
 
   return (
     <>
-      <Stack
-        sx={{ height: 100 }}
-        spacing={1}
-        direction="row"
-        justifyItems={"center"}
-      >
-        {channels?.map((channel) => (
-          <Fader
-            key={channel.selector}
-            changePosition={(e: number) => changeVolume(e, channel.selector)}
-            position={faderLevels[channel.selector].level}
-          />
-        ))}
-      </Stack>
-      <Grid justifyContent={"center"}>
-        <CrossFader label="cross" />
+      <Grid container>
+        <Grid
+          container
+          justifyContent={"space-around"}
+          style={{ minHeight: "80px", marginBottom: "50px" }}
+        >
+          <Grid item xs={2} justifyContent="center">
+            {channels && channels[0] ? (
+              <Fader
+                changePosition={(e: number) =>
+                  changeVolume(e, channels[0].selector)
+                }
+                position={faderLevels[channels[0].selector].level}
+              />
+            ) : (
+              <Fader disabled changePosition={() => console.log("test")} />
+            )}
+          </Grid>
+          {/* <Knob
+          size={100}
+          numTicks={125}
+          degrees={180}
+          min={1}
+          max={100}
+          value={0}
+          styled={false}
+          onChange={(e: any) => console.log("onChange", e)}
+          /> */}
+          <Grid item xs={2} justifyContent="center">
+            {channels && channels[1] ? (
+              <Fader
+                changePosition={(e: number) =>
+                  changeVolume(e, channels[1].selector)
+                }
+                position={faderLevels[channels[1].selector].level}
+              />
+            ) : (
+              <Fader disabled changePosition={() => console.log("test")} />
+            )}
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid container justifyContent={"center"}>
+        <Grid item xs={6}>
+          <CrossFader label="cross" />
+        </Grid>
       </Grid>
     </>
   );

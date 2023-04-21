@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { Grid, Typography } from "@mui/material";
+import { useState, useEffect } from "react";
 
 type Props = {
   duration: number;
@@ -53,13 +54,17 @@ const TimeDisplay = ({
     return () => {
       clearInterval(timerInterval);
     };
-  });
+  }, [isEmpty, isStopped, isPaused, isPlaying, seconds, minutes, reset]);
 
   return (
-    <div>
-      <h2>{minutes < 10 ? `0${minutes}` : minutes}</h2>
-      <h2>{seconds < 10 ? `0${seconds}` : seconds}</h2>
-    </div>
+    <Grid container spacing={2}>
+      <Grid item justifyContent="center">
+        <Typography>
+          {minutes < 10 ? `0${minutes}` : minutes} :{" "}
+          {seconds < 10 ? `0${seconds}` : seconds}
+        </Typography>
+      </Grid>
+    </Grid>
   );
 };
 

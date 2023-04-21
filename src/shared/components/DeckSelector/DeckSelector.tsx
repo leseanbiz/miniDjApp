@@ -1,9 +1,9 @@
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import {
   changeSelectedTrack,
   selectSelectedDeck,
-} from "../../features/mixer/mixerSlice";
+} from "../../../features/mixer/mixerSlice";
 
 const DeckSelector = () => {
   const dispatch = useAppDispatch();

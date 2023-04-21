@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import Slider from "@mui/material/Slider";
-import { MixerContext } from "../../providers/AudioProvider/AudioProvider";
+import { MixerContext } from "../../../providers/AudioProvider/AudioProvider";
+import { styled } from "@mui/system";
 
 type Props = {
   label?: string;
@@ -8,6 +9,25 @@ type Props = {
   max?: number;
   disabled?: boolean;
 };
+
+const StyledCrossfader = styled(Slider)({
+  color: "black", //color of the slider between thumbs
+  "& .MuiSlider-thumb": {
+    width: "10px",
+    height: "25px",
+    borderRadius: 0,
+    backgroundColor: "black", //color of thumbs
+  },
+  "& .MuiSlider-rail": {
+    color: "black",
+    backgroundColor: "gray", ////color of the slider outside  teh area between thumbs
+  },
+  "& .MuiSlider-track": {
+    color: "black",
+    backgroundColor: "gray", ////color of the slider outside  teh area between thumbs
+  },
+  display: "flex",
+});
 
 const CrossFader = ({
   label = "",
@@ -23,10 +43,10 @@ const CrossFader = ({
       // [BUG] - loading trackA then trackB causes an extra gain node to be created on channel A
       // [BUG] - loading trackB first, causes some odd connection in the gain nodes
       channels?.map((channel) => {
-        createNewGainNode(channel.elementSource, channel.id);
+        return createNewGainNode(channel.elementSource, channel.id);
       });
     }
-  }, [channels]);
+  }, [channels, createNewGainNode]);
 
   // TODO:
   // use selectors (A,B,C,D) to label the tracks
@@ -45,22 +65,19 @@ const CrossFader = ({
   };
 
   return (
-    <>
-      <p>{label}</p>
-      <Slider
-        aria-label="Cross Fader"
-        orientation="horizontal"
-        defaultValue={0.5}
-        step={0.001}
-        marks
-        min={min}
-        max={max}
-        disabled={disabled}
-        value={faderPosition}
-        valueLabelDisplay="auto"
-        onChange={(_, value) => crossFade(value as number)}
-      />
-    </>
+    <StyledCrossfader
+      aria-label="Cross Fader"
+      orientation="horizontal"
+      defaultValue={0.5}
+      step={0.001}
+      marks
+      min={min}
+      max={max}
+      disabled={disabled}
+      value={faderPosition}
+      valueLabelDisplay="auto"
+      onChange={(_, value) => crossFade(value as number)}
+    />
   );
 };
 
