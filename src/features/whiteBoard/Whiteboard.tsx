@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 import { actions } from "@liveblocks/redux";
 import Rectangle from "./Rectangle";
 import {
@@ -7,8 +7,8 @@ import {
   deleteShape,
   onCanvasPointerUp,
   onCanvasPointerMove,
-  selectShapes,
-  IInitialState,
+  // selectShapes,
+  // IInitialState,
 } from "./whiteBoardSlice";
 import { client, RootState } from "../../app/store";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";

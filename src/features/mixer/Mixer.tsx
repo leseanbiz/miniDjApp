@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { MixerContext } from "../../providers/AudioProvider/AudioProvider";
 import CrossFader from "../../shared/components/Fader/CrossFader";
 import Fader from "../../shared/components/Fader/Fader";
-import Knob from "../../shared/components/Knob/Knob";
+// import Knob from "../../shared/components/Knob/Knob";
 
 const Mixer = () => {
   const { channels } = useContext(MixerContext);

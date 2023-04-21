@@ -18,7 +18,7 @@ type ContextValue = {
 };
 // TODO: should return Channels object and functions
 // How will created gain nodes be added to the channels object tree?
-type Channels = { A: Channel; B: Channel; C: Channel; D: Channel };
+// type Channels = { A: Channel; B: Channel; C: Channel; D: Channel };
 export type Channel = {
   id: string;
   selector: string;
